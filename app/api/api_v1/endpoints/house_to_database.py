@@ -13,7 +13,8 @@ logger = logging.getLogger(__name__)
 @router.post('/house_to_database', response_model=HouseVariablesAdd, status_code=201)
 async def post_house_to_database(house_variables: HouseVariablesAdd,
                                  auth=Depends(Auth().auth_wrapper)) -> HouseVariablesAdd:
-    """Post housing information to the funda database. Requires a header with user JWT.
+    """Post housing information to the funda database. Requires a header with user JWT. Return 409 code when link
+    already exists, 500 on unexpected database exception and 201 on success.
 
     Arguments (HouseVariables):
         - link

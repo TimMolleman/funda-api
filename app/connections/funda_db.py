@@ -20,6 +20,7 @@ class FundaDB:
     @query
     def insert_house_data(self, link: str, city: str, house_surface: int, garden_surface: int,
                           rooms: int, price: int) -> None:
+        """Manually inserts housing data into the housing info table."""
         sql = sqlalchemy.text('''
             INSERT INTO city_info
             VALUES (:link, :time_added, :city, :house_surface, :garden_surface, :rooms, :price)
@@ -30,6 +31,7 @@ class FundaDB:
 
     @query
     def get_house_rows(self, lower_price: Optional[float] = None, upper_price: Optional[float] = None):
+        """Get housing data from table. User can optionally request lower_price and/or upper_price."""
         text = 'SELECT * FROM city_info'
 
         if lower_price and upper_price:
@@ -54,7 +56,7 @@ class FundaDB:
 
     @query
     def get_user_info(self, username: str):
-        """Get user info for trying to log in."""
+        """Get user info for log in."""
         sql = sqlalchemy.text(f'''
             SELECT username, user_password 
             FROM users 

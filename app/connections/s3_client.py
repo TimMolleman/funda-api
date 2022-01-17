@@ -6,6 +6,7 @@ import os
 
 @singleton
 class S3Client:
+    """S3 client for connecting with AWS S3."""
     def __init__(self):
         self.s3 = boto3.client('s3',
                                region_name='eu-west-2',
@@ -13,6 +14,7 @@ class S3Client:
                                aws_secret_access_key=os.environ['AMAZON_SECRET_ACCESS_KEY'])
 
     def read_most_recent_model(self):
+        """Get the most recent version of the model from AWS S3 for exposing in API endpoint."""
         model_links = self.s3.list_objects_v2(Bucket='funda-airflow', Prefix='models')
 
         if len(model_links.get('Contents')) > 1:

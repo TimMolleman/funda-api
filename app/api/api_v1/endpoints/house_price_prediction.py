@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 async def get_house_price_prediction(predictor_variables: PredictorVariables = Depends(),
                                      auth=Depends(Auth().auth_wrapper)) -> HousePrice:
     """Get housing price prediction based on linear regression model stored in S3. Requires a header with user JWT
-    bearer token.
+    bearer token. Return code 500 on unexpected exception and 200 on success.
 
     Arguments (PredictorVariables):
         - house_surface

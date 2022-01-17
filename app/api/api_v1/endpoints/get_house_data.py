@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 @router.get('/get_house_data', response_model=HouseDataReturn, status_code=200)
 async def get_house_data(price_range: PriceRange = Depends(), auth=Depends(Auth().auth_wrapper)) -> HouseDataReturn:
-    """Get house data records from the funda database. Requires a header with user JWT bearer token.
+    """Get house data records from the funda database. Requires a header with user JWT bearer token. Return code 500
+    on unexpected exception and 200 on success.
 
     Arguments (PriceRange):
         - lower_price (optional)

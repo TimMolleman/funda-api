@@ -10,6 +10,7 @@ router = APIRouter()
 
 @router.post('/register', status_code=201)
 def register(auth_details: AuthDetails):
+    """Endpoint for registering user. On double username return status code 409. On success code 201."""
     hashed_password = Auth().get_password_hash(auth_details.password)
 
     try:
@@ -22,6 +23,7 @@ def register(auth_details: AuthDetails):
 
 @router.post('/login', status_code=201)
 def login(auth_details: AuthDetails):
+    """Endpoint for login of user. Return 401 if username not available or password wrong. On success code 201."""
     user_info = FundaDB().get_user_info(auth_details.username)
 
     if not user_info:

@@ -11,7 +11,7 @@ app = FastAPI(openapi_prefix='/prod')
 # Root route
 @app.get('/')
 async def root():
-    return {'message': 'This is the API for requesting housing price predictions'}
+    return {'message': 'This is the root page for the API for requesting Funda housing data'}
 
 
 # Include routers and create mangum handler
